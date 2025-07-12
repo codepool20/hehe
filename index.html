@@ -3,72 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>Happy Birthday Uma!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f9c6f9 0%, #f6e6ff 50%, #b2f7ef 100%);
             overflow: hidden;
+            font-family: 'Baloo 2', cursive;
         }
-        h1 {
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fffbe7;
+            border-radius: 50%;
+            opacity: 0.7;
+            box-shadow: 0 0 8px 2px #fffbe7;
+            animation: sparkle 2s linear infinite;
         }
-        .cake {
-            font-size: 50px;
-            margin: 20px;
-            cursor: pointer;
+        @keyframes sparkle {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        .greeting-card {
+            position: relative;
+            margin: 60px auto 0 auto;
+            background: rgba(255,255,255,0.85);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px #e0b3ff99;
+            max-width: 500px;
+            padding: 48px 32px 64px 32px;
+            text-align: center;
+        }
+        .caticorn {
+            width: 160px;
+            margin: 0 auto 24px auto;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8rem;
+            color: #e75480;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px #fff, 0 0 2px #e0b3ff;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            color: #a259c6;
+            margin-bottom: 24px;
+        }
+        .pawprints {
+            margin: 18px 0 0 0;
+            font-size: 1.5rem;
+            color: #f7b2e6;
         }
         .balloon {
             position: absolute;
-            width: 40px;
-            height: 60px;
-            background-color: rgba(255, 0, 0, 0.7);
-            border-radius: 50%;
-            animation: float 5s infinite ease-in;
+            bottom: -120px;
+            width: 48px;
+            height: 64px;
+            background: linear-gradient(135deg, #f7b2e6 0%, #b2f7ef 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 4px 16px #e0b3ff55;
+            z-index: 2;
+            animation: riseBalloon linear forwards;
         }
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-100px) rotate(10deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -18px;
+            width: 2px;
+            height: 18px;
+            background: #e75480;
+            transform: translateX(-50%);
+        }
+        @keyframes riseBalloon {
+            0% { bottom: -120px; opacity: 1; }
+            90% { opacity: 1; }
+            100% { bottom: 110vh; opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            z-index: 3;
+            animation: confetti-fall 3s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { top: -20px; }
+            100% { top: 110vh; }
+        }
+        .super-girl {
+            font-size: 1.1rem;
+            color: #e75480;
+            font-weight: bold;
+            margin-top: 18px;
+            letter-spacing: 1px;
+        }
+        .unicorn {
+            font-size: 2rem;
+            color: #b2f7ef;
+            margin: 0 6px;
+        }
+        .cat-heart {
+            font-size: 2rem;
+            color: #e75480;
+            margin: 0 6px;
+        }
+        .footer {
+            margin-top: 32px;
+            font-size: 1.1rem;
+            color: #a259c6;
+        }
+        .cat-game {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .game-cat {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .game-cat img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-cat:hover {
+            transform: scale(1.1);
+        }
+
+        .score {
+            font-size: 1.2rem;
+            color: #e75480;
+            margin: 10px 0;
+        }
+
+        .real-cats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .real-cat {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .real-cat img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .real-cat:hover {
+            transform: scale(1.1);
+        }
+
+        .play-music {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #e75480;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            border: 2px solid #f7b2e6;
         }
     </style>
 </head>
 <body>
-    <h1>🎉 Happy Birthday! 🎉</h1>
-    <div class="cake" onclick="popBalloons()">🎂</div>
-    <p>Click the cake to celebrate!</p>
+    <div class="play-music" onclick="playMusic()">🎵 Click for Birthday Music!</div>
+
+    <!-- Using a simpler audio source -->
+    <audio id="birthdaySong" loop>
+        <source src="https://www.happybirthdaymusic.info/music/hbd1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="greeting-card">
+        <svg class="caticorn" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="80" cy="120" rx="60" ry="30" fill="#fff"/>
+            <ellipse cx="80" cy="90" rx="50" ry="40" fill="#fff"/>
+            <ellipse cx="60" cy="80" rx="8" ry="12" fill="#f7b2e6"/>
+            <ellipse cx="100" cy="80" rx="8" ry="12" fill="#f7b2e6"/>
+            <ellipse cx="80" cy="110" rx="18" ry="10" fill="#f6e6ff"/>
+            <polygon points="80,30 85,70 75,70" fill="#e0b3ff"/>
+            <polygon points="80,10 83,30 77,30" fill="#f7b2e6"/>
+            <polygon points="80,0 82,10 78,10" fill="#e75480"/>
+            <ellipse cx="60" cy="60" rx="12" ry="18" fill="#fff"/>
+            <ellipse cx="100" cy="60" rx="12" ry="18" fill="#fff"/>
+            <ellipse cx="60" cy="60" rx="6" ry="9" fill="#f7b2e6"/>
+            <ellipse cx="100" cy="60" rx="6" ry="9" fill="#f7b2e6"/>
+            <ellipse cx="80" cy="100" rx="6" ry="4" fill="#e75480"/>
+            <ellipse cx="70" cy="95" rx="3" ry="2" fill="#e75480"/>
+            <ellipse cx="90" cy="95" rx="3" ry="2" fill="#e75480"/>
+            <ellipse cx="80" cy="80" rx="2" ry="1.5" fill="#e75480"/>
+            <ellipse cx="80" cy="85" rx="1.5" ry="1" fill="#e75480"/>
+            <polygon points="50,40 60,60 55,65" fill="#f7b2e6"/>
+            <polygon points="110,40 100,60 105,65" fill="#f7b2e6"/>
+        </svg>
+        <div class="title">Happy Birthday Uma! <span class="unicorn">🦄</span></div>
+        <div class="subtitle">Wishing you a magical, purr-fect, super-girly 25th birthday!<br>May your day be filled with sparkles, rainbows, and cat cuddles! <span class="cat-heart">😻</span></div>
+        <div class="pawprints">🐾 🐾 🐾 🐾 🐾</div>
+        <div class="super-girl">You are pawsome, unique, and totally super! <span style="font-size:1.5em;">💖</span></div>
+        <div class="footer">With love, from your friends (and all the magical cats!)</div>
+
+        <div class="cat-game">
+            <div class="score">Catch the kitties! Score: <span id="score">0</span></div>
+        </div>
+
+        <div class="real-cats">
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=200&h=200" alt="Cute cat 1"></div>
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=200&h=200" alt="Cute cat 2"></div>
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=200&h=200" alt="Cute cat 3"></div>
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=200&h=200" alt="Cute cat 4"></div>
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=200&h=200" alt="Cute cat 5"></div>
+            <div class="real-cat"><img src="https://images.unsplash.com/photo-1548546738-8509cb246ed3?auto=format&fit=crop&w=200&h=200" alt="Cute cat 6"></div>
+        </div>
+    </div>
 
     <script>
-        function popBalloons() {
-            // Play a sound (optional)
-            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-balloon-pop-with-delay-2354.mp3');
-            audio.play();
-
-            // Create balloons
-            for (let i = 0; i < 20; i++) {
-                createBalloon();
-            }
+        // Sparkles
+        for (let i = 0; i < 40; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = (Math.random() * 2) + 's';
+            document.body.appendChild(sparkle);
         }
-
+        // Confetti
+        const confettiColors = ['#f7b2e6', '#e75480', '#b2f7ef', '#fffbe7', '#a259c6'];
+        for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.top = Math.random() * 10 + 'vh';
+            document.body.appendChild(confetti);
+        }
+        // Balloons
         function createBalloon() {
             const balloon = document.createElement('div');
             balloon.className = 'balloon';
             balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.background = `linear-gradient(135deg, ${confettiColors[Math.floor(Math.random()*confettiColors.length)]} 0%, #fffbe7 100%)`;
             balloon.style.animationDuration = Math.random() * 3 + 2 + 's';
             document.body.appendChild(balloon);
-
-            // Remove balloon after animation
             setTimeout(() => {
                 balloon.remove();
             }, 5000);
+        }
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createBalloon, i * 300);
+        }
+        // Create new balloons continuously
+        setInterval(() => {
+            createBalloon();
+        }, 3000);
+
+        // Cat game logic
+        let score = 0;
+        const gameArea = document.querySelector('.cat-game');
+        const scoreElement = document.getElementById('score');
+
+        function createGameCat() {
+            const cat = document.createElement('div');
+            cat.className = 'game-cat';
+
+            // Array of cute cat image URLs
+            const catImages = [
+                'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=100&h=100',
+                'https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=100&h=100',
+                'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=100&h=100',
+                'https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?auto=format&fit=crop&w=100&h=100',
+                'https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=100&h=100'
+            ];
+
+            cat.innerHTML = `<img src="${catImages[Math.floor(Math.random() * catImages.length)]}" alt="Catch me!">`;
+
+            const size = Math.random() * 20 + 40; // Random size between 40-60px
+            cat.style.width = `${size}px`;
+            cat.style.height = `${size}px`;
+
+            // Random position
+            cat.style.left = Math.random() * (gameArea.offsetWidth - size) + 'px';
+            cat.style.top = Math.random() * (gameArea.offsetHeight - size) + 'px';
+
+            cat.addEventListener('click', () => {
+                score++;
+                scoreElement.textContent = score;
+                cat.remove();
+                if (score > 0 && score % 5 === 0) {
+                    createConfettiBurst();
+                }
+            });
+
+            gameArea.appendChild(cat);
+
+            // Remove cat after random time if not caught
+            setTimeout(() => cat.remove(), 2000);
+        }
+
+        // Create new game cats periodically
+        setInterval(createGameCat, 1500);
+
+        // Add this at the start of your script
+        function playMusic() {
+            const audio = document.getElementById('birthdaySong');
+            audio.play()
+                .then(() => {
+                    document.querySelector('.play-music').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Audio playback failed:', error);
+                    document.querySelector('.play-music').textContent = '🔇 Please try again!';
+                });
         }
     </script>
 </body>
