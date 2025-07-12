@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .cake {
+            font-size: 50px;
+            margin: 20px;
+            cursor: pointer;
+        }
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: rgba(255, 0, 0, 0.7);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday! 🎉</h1>
+    <div class="cake" onclick="popBalloons()">🎂</div>
+    <p>Click the cake to celebrate!</p>
+
+    <script>
+        function popBalloons() {
+            // Play a sound (optional)
+            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-balloon-pop-with-delay-2354.mp3');
+            audio.play();
+
+            // Create balloons
+            for (let i = 0; i < 20; i++) {
+                createBalloon();
+            }
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(balloon);
+
+            // Remove balloon after animation
+            setTimeout(() => {
+                balloon.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

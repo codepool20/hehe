@@ -1,0 +1,49 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+env/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# Misc
+*.bak
+*.tmp
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Test output
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Backup files
+*~
+
+# Pycharm
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Node
+node_modules/
+
