@@ -316,6 +316,88 @@
             0%, 100% { filter: hue-rotate(0deg); }
             50% { filter: hue-rotate(180deg); }
         }
+
+        .love-shower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .love-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: loveShower 4s linear forwards;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes loveShower {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+            25% {
+                transform: translateY(25vh) rotate(90deg) scale(1.2);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1);
+                opacity: 1;
+            }
+            75% {
+                transform: translateY(75vh) rotate(270deg) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(0.8);
+                opacity: 0.3;
+            }
+        }
+
+        .love-achievement {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #8b008b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            z-index: 10000;
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+            animation: lovePopup 0.6s ease-out;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            display: none;
+            border: 3px solid #fff;
+        }
+
+        @keyframes lovePopup {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .heart-pulse {
+            animation: heartPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
     </style>
 </head>
 <body>
@@ -332,7 +414,14 @@
         <div style="font-size: 1rem; margin-top: 10px;">You caught 10 kitties! Enjoy the wild kitty shower! 🐱✨</div>
     </div>
 
+    <div class="love-achievement" id="loveAchievement">
+        <div class="heart-pulse">💖 LOVE GODDESS! 💖</div>
+        <div style="font-size: 1.2rem; margin-top: 15px;">15 KITTIES CAUGHT!</div>
+        <div style="font-size: 1rem; margin-top: 10px;">You deserve all the flowers, chocolates & hearts! 🌸🍫💕</div>
+    </div>
+
     <div class="kitty-shower" id="kittyShower"></div>
+    <div class="love-shower" id="loveShower"></div>
 
     <div class="greeting-card">
         <svg class="caticorn" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -595,6 +684,11 @@
                 if (score === 10) {
                     triggerKittyShower();
                 }
+
+                // LOVE SHOWER at 15 cats!
+                if (score === 15) {
+                    triggerLoveShower();
+                }
             });
 
             gameArea.appendChild(cat);
@@ -693,6 +787,97 @@
                 playTone(note.freq, note.duration, currentTime);
                 currentTime += note.duration;
             });
+        }
+
+        // LOVE SHOWER function for 15 kitties!
+        function triggerLoveShower() {
+            const shower = document.getElementById('loveShower');
+            const popup = document.getElementById('loveAchievement');
+
+            // Show love achievement popup
+            popup.style.display = 'block';
+
+            // Play special love sound
+            if (audioContext && isPlaying) {
+                playLoveSound();
+            }
+
+            // Hide popup after 4 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 4000);
+
+            // Array of love items - flowers, chocolates, hearts
+            const loveItems = [
+                '🌸', '🌺', '🌹', '🌻', '🌷', '🌼', '🌙', '⭐', '✨', // Flowers & sparkles
+                '🍫', '🍰', '🧁', '🍪', '🍩', '🍭', '🍬', '🎂', '🍓', // Chocolates & sweets
+                '💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '💜', '🩷', // Hearts
+                '🦋', '🌈', '💫', '🌟', '🎀', '💐', '🌺', '🌸', '🌹' // Extra pretty items
+            ];
+
+            // Create 80 falling love items over 6 seconds
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const loveItem = document.createElement('div');
+                    loveItem.className = 'love-item';
+                    loveItem.textContent = loveItems[Math.floor(Math.random() * loveItems.length)];
+
+                    // Random horizontal position
+                    loveItem.style.left = Math.random() * 100 + 'vw';
+
+                    // Random size between 1.5-3rem
+                    const size = Math.random() * 1.5 + 1.5;
+                    loveItem.style.fontSize = `${size}rem`;
+
+                    // Random animation duration
+                    loveItem.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+                    // Add random delay for more natural look
+                    loveItem.style.animationDelay = (Math.random() * 0.5) + 's';
+
+                    shower.appendChild(loveItem);
+
+                    // Remove item after animation completes
+                    setTimeout(() => {
+                        if (loveItem.parentNode) {
+                            loveItem.remove();
+                        }
+                    }, 6000);
+                }, i * 75); // Stagger the love items
+            }
+        }
+
+        function playLoveSound() {
+            if (!audioContext) return;
+
+            // Play a romantic, dreamy melody
+            const loveNotes = [
+                { freq: 440.00, duration: 0.4 }, // A4
+                { freq: 523.25, duration: 0.4 }, // C5
+                { freq: 659.25, duration: 0.6 }, // E5
+                { freq: 783.99, duration: 0.4 }, // G5
+                { freq: 659.25, duration: 0.4 }, // E5
+                { freq: 783.99, duration: 0.6 }, // G5
+                { freq: 1046.50, duration: 0.8 }, // C6
+                { freq: 987.77, duration: 0.4 }, // B5
+                { freq: 880.00, duration: 1.0 }, // A5
+            ];
+
+            let currentTime = audioContext.currentTime;
+            loveNotes.forEach(note => {
+                playTone(note.freq, note.duration, currentTime);
+                currentTime += note.duration;
+            });
+
+            // Add some sparkle effects with higher frequencies
+            setTimeout(() => {
+                const sparkleFreqs = [1318.51, 1567.98, 1975.53]; // E6, G6, B6
+                sparkleFreqs.forEach((freq, index) => {
+                    setTimeout(() => {
+                        playTone(freq, 0.3, audioContext.currentTime);
+                    }, index * 100);
+                });
+            }, 2000);
         }
     </script>
 </body>
