@@ -201,16 +201,49 @@
             cursor: pointer;
             z-index: 1000;
             border: 2px solid #f7b2e6;
+            transition: all 0.3s ease;
+        }
+
+        .play-music:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #f7b2e6;
+            z-index: 1000;
+            display: none;
+        }
+
+        .music-controls button {
+            background: #e75480;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .music-controls button:hover {
+            background: #f7b2e6;
         }
     </style>
 </head>
 <body>
     <div class="play-music" onclick="playMusic()">🎵 Click for Birthday Music!</div>
 
-    <!-- Using a simpler audio source -->
-    <audio id="birthdaySong" loop>
-        <source src="https://www.happybirthdaymusic.info/music/hbd1.mp3" type="audio/mpeg">
-    </audio>
+    <div class="music-controls" id="musicControls">
+        <button onclick="pauseMusic()">⏸️ Pause</button>
+        <button onclick="resumeMusic()">▶️ Play</button>
+        <button onclick="stopMusic()">⏹️ Stop</button>
+    </div>
 
     <div class="greeting-card">
         <svg class="caticorn" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,6 +288,133 @@
     </div>
 
     <script>
+        // Audio Context for better browser compatibility
+        let audioContext;
+        let audioBuffer;
+        let audioSource;
+        let isPlaying = false;
+
+        // Create a simple birthday melody using Web Audio API
+        function createBirthdayMelody() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Birthday song notes (simplified Happy Birthday melody)
+            const notes = [
+                { freq: 261.63, duration: 0.5 }, // C4
+                { freq: 261.63, duration: 0.5 }, // C4
+                { freq: 293.66, duration: 1.0 }, // D4
+                { freq: 261.63, duration: 1.0 }, // C4
+                { freq: 349.23, duration: 1.0 }, // F4
+                { freq: 329.63, duration: 2.0 }, // E4
+                { freq: 261.63, duration: 0.5 }, // C4
+                { freq: 261.63, duration: 0.5 }, // C4
+                { freq: 293.66, duration: 1.0 }, // D4
+                { freq: 261.63, duration: 1.0 }, // C4
+                { freq: 392.00, duration: 1.0 }, // G4
+                { freq: 349.23, duration: 2.0 }, // F4
+            ];
+
+            return notes;
+        }
+
+        function playTone(frequency, duration, startTime) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, startTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+            oscillator.start(startTime);
+            oscillator.stop(startTime + duration);
+        }
+
+        function playBirthdayMelody() {
+            const notes = createBirthdayMelody();
+            let currentTime = audioContext.currentTime;
+
+            notes.forEach(note => {
+                playTone(note.freq, note.duration, currentTime);
+                currentTime += note.duration;
+            });
+
+            // Loop the melody
+            setTimeout(() => {
+                if (isPlaying) {
+                    playBirthdayMelody();
+                }
+            }, currentTime * 1000);
+        }
+
+        function playMusic() {
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+
+                isPlaying = true;
+                playBirthdayMelody();
+
+                document.querySelector('.play-music').style.display = 'none';
+                document.getElementById('musicControls').style.display = 'block';
+
+                // Add celebration sound effects
+                playConfettiSound();
+
+            } catch (error) {
+                console.error('Audio not supported:', error);
+                document.querySelector('.play-music').textContent = '🎵 Audio not supported';
+            }
+        }
+
+        function pauseMusic() {
+            isPlaying = false;
+            if (audioContext) {
+                audioContext.suspend();
+            }
+        }
+
+        function resumeMusic() {
+            isPlaying = true;
+            if (audioContext) {
+                audioContext.resume();
+                playBirthdayMelody();
+            }
+        }
+
+        function stopMusic() {
+            isPlaying = false;
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+            document.querySelector('.play-music').style.display = 'block';
+            document.getElementById('musicControls').style.display = 'none';
+        }
+
+        function playConfettiSound() {
+            if (!audioContext) return;
+
+            // Create a burst of high-frequency tones for confetti effect
+            const frequencies = [800, 1000, 1200, 1500];
+            let startTime = audioContext.currentTime;
+
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => {
+                    playTone(freq, 0.1, audioContext.currentTime);
+                }, index * 50);
+            });
+        }
+
         // Sparkles
         for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
@@ -264,6 +424,7 @@
             sparkle.style.animationDelay = (Math.random() * 2) + 's';
             document.body.appendChild(sparkle);
         }
+
         // Confetti
         const confettiColors = ['#f7b2e6', '#e75480', '#b2f7ef', '#fffbe7', '#a259c6'];
         for (let i = 0; i < 30; i++) {
@@ -275,6 +436,7 @@
             confetti.style.top = Math.random() * 10 + 'vh';
             document.body.appendChild(confetti);
         }
+
         // Balloons
         function createBalloon() {
             const balloon = document.createElement('div');
@@ -287,9 +449,11 @@
                 balloon.remove();
             }, 5000);
         }
+
         for (let i = 0; i < 20; i++) {
             setTimeout(createBalloon, i * 300);
         }
+
         // Create new balloons continuously
         setInterval(() => {
             createBalloon();
@@ -327,32 +491,32 @@
                 score++;
                 scoreElement.textContent = score;
                 cat.remove();
+
+                // Play a little sound effect when catching a cat
+                if (audioContext && isPlaying) {
+                    playTone(523.25, 0.2, audioContext.currentTime); // C5 note
+                }
+
                 if (score > 0 && score % 5 === 0) {
-                    createConfettiBurst();
+                    playConfettiSound();
                 }
             });
 
             gameArea.appendChild(cat);
 
             // Remove cat after random time if not caught
-            setTimeout(() => cat.remove(), 2000);
+            setTimeout(() => {
+                if (cat.parentNode) {
+                    cat.remove();
+                }
+            }, 2000);
         }
 
         // Create new game cats periodically
         setInterval(createGameCat, 1500);
 
-        // Add this at the start of your script
-        function playMusic() {
-            const audio = document.getElementById('birthdaySong');
-            audio.play()
-                .then(() => {
-                    document.querySelector('.play-music').style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Audio playback failed:', error);
-                    document.querySelector('.play-music').textContent = '🔇 Please try again!';
-                });
-        }
+        // Initialize first game cat
+        createGameCat();
     </script>
 </body>
 </html>
