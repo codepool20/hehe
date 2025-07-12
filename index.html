@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Uma!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -11,8 +11,9 @@
             padding: 0;
             min-height: 100vh;
             background: linear-gradient(135deg, #f9c6f9 0%, #f6e6ff 50%, #b2f7ef 100%);
-            overflow: hidden;
+            overflow-y: auto; /* Enable vertical scrolling */
             font-family: 'Baloo 2', cursive;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
         .sparkle {
             position: absolute;
@@ -31,17 +32,18 @@
         }
         .greeting-card {
             position: relative;
-            margin: 60px auto 0 auto;
+            margin: 20px auto 40px auto; /* Adjusted margin for mobile */
             background: rgba(255,255,255,0.85);
             border-radius: 32px;
             box-shadow: 0 8px 32px #e0b3ff99;
-            max-width: 500px;
-            padding: 48px 32px 64px 32px;
+            max-width: 90%; /* Responsive width */
+            padding: 24px 16px 32px 16px; /* Reduced padding for mobile */
             text-align: center;
+            box-sizing: border-box;
         }
         .caticorn {
-            width: 160px;
-            margin: 0 auto 24px auto;
+            width: 120px; /* Smaller size for mobile */
+            margin: 0 auto 16px auto;
             display: block;
             animation: float 3s ease-in-out infinite;
         }
@@ -51,26 +53,26 @@
         }
         .title {
             font-family: 'Pacifico', cursive;
-            font-size: 2.8rem;
+            font-size: 2rem; /* Smaller font for mobile */
             color: #e75480;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-shadow: 0 2px 8px #fff, 0 0 2px #e0b3ff;
         }
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1rem; /* Adjusted for mobile */
             color: #a259c6;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         .pawprints {
-            margin: 18px 0 0 0;
-            font-size: 1.5rem;
+            margin: 12px 0 0 0;
+            font-size: 1.2rem;
             color: #f7b2e6;
         }
         .balloon {
             position: absolute;
             bottom: -120px;
-            width: 48px;
-            height: 64px;
+            width: 40px; /* Smaller balloons for mobile */
+            height: 56px;
             background: linear-gradient(135deg, #f7b2e6 0%, #b2f7ef 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             box-shadow: 0 4px 16px #e0b3ff55;
@@ -94,8 +96,8 @@
         }
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px; /* Smaller confetti for mobile */
+            height: 8px;
             border-radius: 50%;
             opacity: 0.8;
             z-index: 3;
@@ -106,135 +108,121 @@
             100% { top: 110vh; }
         }
         .super-girl {
-            font-size: 1.1rem;
+            font-size: 0.9rem; /* Adjusted for mobile */
             color: #e75480;
             font-weight: bold;
-            margin-top: 18px;
+            margin-top: 12px;
             letter-spacing: 1px;
         }
         .unicorn {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #b2f7ef;
-            margin: 0 6px;
+            margin: 0 4px;
         }
         .cat-heart {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #e75480;
-            margin: 0 6px;
+            margin: 0 4px;
         }
         .footer {
-            margin-top: 32px;
-            font-size: 1.1rem;
+            margin-top: 24px;
+            font-size: 0.9rem; /* Adjusted for mobile */
             color: #a259c6;
         }
         .cat-game {
             position: relative;
             width: 100%;
-            height: 150px;
-            margin: 20px 0;
+            height: 120px; /* Reduced height for mobile */
+            margin: 16px 0;
             overflow: hidden;
             cursor: pointer;
         }
-
         .game-cat {
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller cats for mobile */
+            height: 50px;
             cursor: pointer;
             transition: transform 0.2s;
             border-radius: 50%;
             overflow: hidden;
         }
-
         .game-cat img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .game-cat:hover {
             transform: scale(1.1);
         }
-
         .score {
-            font-size: 1.2rem;
+            font-size: 1rem; /* Adjusted for mobile */
             color: #e75480;
-            margin: 10px 0;
+            margin: 8px 0;
         }
-
         .real-cats {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 16px 0;
         }
-
         .real-cat {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            border-radius: 15px;
+            width: 80px; /* Smaller images for mobile */
+            height: 80px;
+            margin: 8px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
-
         .real-cat img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .real-cat:hover {
             transform: scale(1.1);
         }
-
         .play-music {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
             color: #e75480;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             z-index: 1000;
             border: 2px solid #f7b2e6;
             transition: all 0.3s ease;
         }
-
         .play-music:hover {
             background: rgba(255, 255, 255, 1);
             transform: scale(1.05);
         }
-
         .music-controls {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             border: 2px solid #f7b2e6;
             z-index: 1000;
             display: none;
         }
-
         .music-controls button {
             background: #e75480;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 4px 8px;
             margin: 2px;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
         }
-
         .music-controls button:hover {
             background: #f7b2e6;
         }
-
         .kitty-shower {
             position: fixed;
             top: 0;
@@ -244,23 +232,20 @@
             pointer-events: none;
             z-index: 9999;
         }
-
         .shower-kitty {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 30px; /* Smaller kitties for mobile */
+            height: 30px;
             border-radius: 50%;
             overflow: hidden;
             animation: kittyShower 3s linear forwards;
-            box-shadow: 0 0 15px rgba(231, 84, 128, 0.8);
+            box-shadow: 0 0 12px rgba(231, 84, 128, 0.8);
         }
-
         .shower-kitty img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         @keyframes kittyShower {
             0% {
                 transform: translateY(-100px) rotate(0deg);
@@ -271,7 +256,6 @@
                 opacity: 0.7;
             }
         }
-
         .achievement-popup {
             position: fixed;
             top: 50%;
@@ -279,17 +263,17 @@
             transform: translate(-50%, -50%);
             background: linear-gradient(135deg, #f7b2e6 0%, #e75480 100%);
             color: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
             z-index: 10000;
-            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.5);
+            box-shadow: 0 8px 24px rgba(231, 84, 128, 0.5);
             animation: popupBounce 0.5s ease-out;
             font-family: 'Pacifico', cursive;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             display: none;
+            max-width: 80%; /* Ensure popup fits on mobile */
         }
-
         @keyframes popupBounce {
             0% {
                 transform: translate(-50%, -50%) scale(0.5);
@@ -303,7 +287,6 @@
                 opacity: 1;
             }
         }
-
         .rainbow-text {
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
             -webkit-background-clip: text;
@@ -311,12 +294,10 @@
             background-clip: text;
             animation: rainbowShimmer 2s ease-in-out infinite;
         }
-
         @keyframes rainbowShimmer {
             0%, 100% { filter: hue-rotate(0deg); }
             50% { filter: hue-rotate(180deg); }
         }
-
         .love-shower {
             position: fixed;
             top: 0;
@@ -326,14 +307,12 @@
             pointer-events: none;
             z-index: 9999;
         }
-
         .love-item {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.5rem; /* Smaller for mobile */
             animation: loveShower 4s linear forwards;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
         }
-
         @keyframes loveShower {
             0% {
                 transform: translateY(-100px) rotate(0deg) scale(0.5);
@@ -356,7 +335,6 @@
                 opacity: 0.3;
             }
         }
-
         .love-achievement {
             position: fixed;
             top: 50%;
@@ -364,18 +342,18 @@
             transform: translate(-50%, -50%);
             background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #8b008b 100%);
             color: white;
-            padding: 40px;
-            border-radius: 25px;
+            padding: 24px;
+            border-radius: 20px;
             text-align: center;
             z-index: 10000;
-            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+            box-shadow: 0 12px 32px rgba(255, 20, 147, 0.6);
             animation: lovePopup 0.6s ease-out;
             font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             display: none;
-            border: 3px solid #fff;
+            max-width: 80%; /* Ensure popup fits on mobile */
+            border: 2px solid #fff;
         }
-
         @keyframes lovePopup {
             0% {
                 transform: translate(-50%, -50%) scale(0.3) rotate(-10deg);
@@ -389,40 +367,95 @@
                 opacity: 1;
             }
         }
-
         .heart-pulse {
             animation: heartPulse 1s ease-in-out infinite;
         }
-
         @keyframes heartPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
+        }
+        /* Media query for larger screens */
+        @media (min-width: 768px) {
+            .greeting-card {
+                margin: 60px auto 40px auto;
+                max-width: 500px;
+                padding: 48px 32px 64px 32px;
+            }
+            .caticorn {
+                width: 160px;
+            }
+            .title {
+                font-size: 2.8rem;
+            }
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            .pawprints {
+                font-size: 1.5rem;
+            }
+            .super-girl {
+                font-size: 1.1rem;
+            }
+            .footer {
+                font-size: 1.1rem;
+            }
+            .cat-game {
+                height: 150px;
+            }
+            .game-cat {
+                width: 60px;
+                height: 60px;
+            }
+            .real-cat {
+                width: 100px;
+                height: 100px;
+            }
+            .play-music {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .music-controls {
+                padding: 10px;
+            }
+            .music-controls button {
+                padding: 5px 10px;
+            }
+            .shower-kitty {
+                width: 40px;
+                height: 40px;
+            }
+            .achievement-popup {
+                padding: 30px;
+                font-size: 1.5rem;
+            }
+            .love-achievement {
+                padding: 40px;
+                font-size: 1.8rem;
+            }
+            .love-item {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="play-music" onclick="playMusic()">🎵 Click for Birthday Music!</div>
-
     <div class="music-controls" id="musicControls">
         <button onclick="pauseMusic()">⏸️ Pause</button>
         <button onclick="resumeMusic()">▶️ Play</button>
         <button onclick="stopMusic()">⏹️ Stop</button>
     </div>
-
     <div class="achievement-popup" id="achievementPopup">
         <div class="rainbow-text">🎉 KITTY MASTER! 🎉</div>
-        <div style="font-size: 1rem; margin-top: 10px;">You caught 10 kitties! Enjoy the wild kitty shower! 🐱✨</div>
+        <div style="font-size: 0.9rem; margin-top: 8px;">You caught 10 kitties! Enjoy the wild kitty shower! 🐱✨</div>
     </div>
-
     <div class="love-achievement" id="loveAchievement">
         <div class="heart-pulse">💖 LOVE GODDESS! 💖</div>
-        <div style="font-size: 1.2rem; margin-top: 15px;">15 KITTIES CAUGHT!</div>
-        <div style="font-size: 1rem; margin-top: 10px;">You deserve all the flowers, chocolates & hearts! 🌸🍫💕</div>
+        <div style="font-size: 1rem; margin-top: 12px;">15 KITTIES CAUGHT!</div>
+        <div style="font-size: 0.9rem; margin-top: 8px;">You deserve all the flowers, chocolates & hearts! 🌸🍫💕</div>
     </div>
-
     <div class="kitty-shower" id="kittyShower"></div>
     <div class="love-shower" id="loveShower"></div>
-
     <div class="greeting-card">
         <svg class="caticorn" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
             <ellipse cx="80" cy="120" rx="60" ry="30" fill="#fff"/>
@@ -448,13 +481,11 @@
         <div class="title">Happy Birthday Uma! <span class="unicorn">🦄</span></div>
         <div class="subtitle">Wishing you a magical, purr-fect, super-girly 25th birthday!<br>May your day be filled with sparkles, rainbows, and cat cuddles! <span class="cat-heart">😻</span></div>
         <div class="pawprints">🐾 🐾 🐾 🐾 🐾</div>
-        <div class="super-girl">You are pawsome, unique, and totally super! <span style="font-size:1.5em;">💖</span></div>
+        <div class="super-girl">You are pawsome, unique, and totally super! <span style="font-size:1.2em;">💖</span></div>
         <div class="footer">With love, from your friends (and all the magical cats!)</div>
-
         <div class="cat-game">
             <div class="score">Catch the kitties! Score: <span id="score">0</span></div>
         </div>
-
         <div class="real-cats">
             <div class="real-cat"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=200&h=200" alt="Cute cat 1"></div>
             <div class="real-cat"><img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=200&h=200" alt="Cute cat 2"></div>
@@ -464,19 +495,13 @@
             <div class="real-cat"><img src="https://images.unsplash.com/photo-1548546738-8509cb246ed3?auto=format&fit=crop&w=200&h=200" alt="Cute cat 6"></div>
         </div>
     </div>
-
     <script>
-        // Audio Context for better browser compatibility
         let audioContext;
         let audioBuffer;
         let audioSource;
         let isPlaying = false;
-
-        // Create a simple birthday melody using Web Audio API
         function createBirthdayMelody() {
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-            // Birthday song notes (simplified Happy Birthday melody)
             const notes = [
                 { freq: 261.63, duration: 0.5 }, // C4
                 { freq: 261.63, duration: 0.5 }, // C4
@@ -491,76 +516,57 @@
                 { freq: 392.00, duration: 1.0 }, // G4
                 { freq: 349.23, duration: 2.0 }, // F4
             ];
-
             return notes;
         }
-
         function playTone(frequency, duration, startTime) {
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-
             oscillator.frequency.value = frequency;
             oscillator.type = 'sine';
-
             gainNode.gain.setValueAtTime(0.3, startTime);
             gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-
             oscillator.start(startTime);
             oscillator.stop(startTime + duration);
         }
-
         function playBirthdayMelody() {
             const notes = createBirthdayMelody();
             let currentTime = audioContext.currentTime;
-
             notes.forEach(note => {
                 playTone(note.freq, note.duration, currentTime);
                 currentTime += note.duration;
             });
-
-            // Loop the melody
             setTimeout(() => {
                 if (isPlaying) {
                     playBirthdayMelody();
                 }
             }, currentTime * 1000);
         }
-
         function playMusic() {
             try {
                 if (!audioContext) {
                     audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 }
-
                 if (audioContext.state === 'suspended') {
                     audioContext.resume();
                 }
-
                 isPlaying = true;
                 playBirthdayMelody();
-
                 document.querySelector('.play-music').style.display = 'none';
                 document.getElementById('musicControls').style.display = 'block';
-
-                // Add celebration sound effects
                 playConfettiSound();
-
             } catch (error) {
                 console.error('Audio not supported:', error);
                 document.querySelector('.play-music').textContent = '🎵 Audio not supported';
             }
         }
-
         function pauseMusic() {
             isPlaying = false;
             if (audioContext) {
                 audioContext.suspend();
             }
         }
-
         function resumeMusic() {
             isPlaying = true;
             if (audioContext) {
@@ -568,7 +574,6 @@
                 playBirthdayMelody();
             }
         }
-
         function stopMusic() {
             isPlaying = false;
             if (audioContext) {
@@ -578,22 +583,16 @@
             document.querySelector('.play-music').style.display = 'block';
             document.getElementById('musicControls').style.display = 'none';
         }
-
         function playConfettiSound() {
             if (!audioContext) return;
-
-            // Create a burst of high-frequency tones for confetti effect
             const frequencies = [800, 1000, 1200, 1500];
             let startTime = audioContext.currentTime;
-
             frequencies.forEach((freq, index) => {
                 setTimeout(() => {
                     playTone(freq, 0.1, audioContext.currentTime);
                 }, index * 50);
             });
         }
-
-        // Sparkles
         for (let i = 0; i < 40; i++) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
@@ -602,8 +601,6 @@
             sparkle.style.animationDelay = (Math.random() * 2) + 's';
             document.body.appendChild(sparkle);
         }
-
-        // Confetti
         const confettiColors = ['#f7b2e6', '#e75480', '#b2f7ef', '#fffbe7', '#a259c6'];
         for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
@@ -614,8 +611,6 @@
             confetti.style.top = Math.random() * 10 + 'vh';
             document.body.appendChild(confetti);
         }
-
-        // Balloons
         function createBalloon() {
             const balloon = document.createElement('div');
             balloon.className = 'balloon';
@@ -627,26 +622,18 @@
                 balloon.remove();
             }, 5000);
         }
-
         for (let i = 0; i < 20; i++) {
             setTimeout(createBalloon, i * 300);
         }
-
-        // Create new balloons continuously
         setInterval(() => {
             createBalloon();
         }, 3000);
-
-        // Cat game logic
         let score = 0;
         const gameArea = document.querySelector('.cat-game');
         const scoreElement = document.getElementById('score');
-
         function createGameCat() {
             const cat = document.createElement('div');
             cat.className = 'game-cat';
-
-            // Array of cute cat image URLs
             const catImages = [
                 'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=100&h=100',
                 'https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=100&h=100',
@@ -654,78 +641,48 @@
                 'https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?auto=format&fit=crop&w=100&h=100',
                 'https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=100&h=100'
             ];
-
             cat.innerHTML = `<img src="${catImages[Math.floor(Math.random() * catImages.length)]}" alt="Catch me!">`;
-
-            const size = Math.random() * 20 + 40; // Random size between 40-60px
+            const size = Math.random() * 20 + 40;
             cat.style.width = `${size}px`;
             cat.style.height = `${size}px`;
-
-            // Random position
             cat.style.left = Math.random() * (gameArea.offsetWidth - size) + 'px';
             cat.style.top = Math.random() * (gameArea.offsetHeight - size) + 'px';
-
             cat.addEventListener('click', () => {
                 score++;
                 scoreElement.textContent = score;
                 cat.remove();
-
-                // Play a little sound effect when catching a cat
                 if (audioContext && isPlaying) {
-                    playTone(523.25, 0.2, audioContext.currentTime); // C5 note
+                    playTone(523.25, 0.2, audioContext.currentTime);
                 }
-
-                // Special celebration for every 5 cats
                 if (score > 0 && score % 5 === 0) {
                     playConfettiSound();
                 }
-
-                // WILD KITTY SHOWER at 10 cats!
                 if (score === 10) {
                     triggerKittyShower();
                 }
-
-                // LOVE SHOWER at 15 cats!
                 if (score === 15) {
                     triggerLoveShower();
                 }
             });
-
             gameArea.appendChild(cat);
-
-            // Remove cat after random time if not caught
             setTimeout(() => {
                 if (cat.parentNode) {
                     cat.remove();
                 }
             }, 2000);
         }
-
-        // Create new game cats periodically
         setInterval(createGameCat, 1500);
-
-        // Initialize first game cat
         createGameCat();
-
-        // WILD KITTY SHOWER function
         function triggerKittyShower() {
             const shower = document.getElementById('kittyShower');
             const popup = document.getElementById('achievementPopup');
-
-            // Show achievement popup
             popup.style.display = 'block';
-
-            // Play special achievement sound
             if (audioContext && isPlaying) {
                 playAchievementSound();
             }
-
-            // Hide popup after 3 seconds
             setTimeout(() => {
                 popup.style.display = 'none';
             }, 3000);
-
-            // Array of cute cat images for the shower
             const showerCatImages = [
                 'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=100&h=100',
                 'https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=100&h=100',
@@ -738,41 +695,27 @@
                 'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=100&h=100',
                 'https://images.unsplash.com/photo-1548546738-8509cb246ed3?auto=format&fit=crop&w=100&h=100'
             ];
-
-            // Create 50 falling kitties over 5 seconds
             for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     const kitty = document.createElement('div');
                     kitty.className = 'shower-kitty';
                     kitty.innerHTML = `<img src="${showerCatImages[Math.floor(Math.random() * showerCatImages.length)]}" alt="Shower kitty">`;
-
-                    // Random horizontal position
                     kitty.style.left = Math.random() * 100 + 'vw';
-
-                    // Random size between 30-60px
-                    const size = Math.random() * 30 + 30;
+                    const size = Math.random() * 20 + 20;
                     kitty.style.width = `${size}px`;
                     kitty.style.height = `${size}px`;
-
-                    // Random animation duration
                     kitty.style.animationDuration = (Math.random() * 2 + 2) + 's';
-
                     shower.appendChild(kitty);
-
-                    // Remove kitty after animation completes
                     setTimeout(() => {
                         if (kitty.parentNode) {
                             kitty.remove();
                         }
                     }, 4000);
-                }, i * 100); // Stagger the kitties
+                }, i * 100);
             }
         }
-
         function playAchievementSound() {
             if (!audioContext) return;
-
-            // Play a triumphant melody
             const triumphantNotes = [
                 { freq: 523.25, duration: 0.3 }, // C5
                 { freq: 659.25, duration: 0.3 }, // E5
@@ -781,76 +724,49 @@
                 { freq: 783.99, duration: 0.3 }, // G5
                 { freq: 1046.50, duration: 0.9 }, // C6
             ];
-
             let currentTime = audioContext.currentTime;
             triumphantNotes.forEach(note => {
                 playTone(note.freq, note.duration, currentTime);
                 currentTime += note.duration;
             });
         }
-
-        // LOVE SHOWER function for 15 kitties!
         function triggerLoveShower() {
             const shower = document.getElementById('loveShower');
             const popup = document.getElementById('loveAchievement');
-
-            // Show love achievement popup
             popup.style.display = 'block';
-
-            // Play special love sound
             if (audioContext && isPlaying) {
                 playLoveSound();
             }
-
-            // Hide popup after 4 seconds
             setTimeout(() => {
                 popup.style.display = 'none';
             }, 4000);
-
-            // Array of love items - flowers, chocolates, hearts
             const loveItems = [
-                '🌸', '🌺', '🌹', '🌻', '🌷', '🌼', '🌙', '⭐', '✨', // Flowers & sparkles
-                '🍫', '🍰', '🧁', '🍪', '🍩', '🍭', '🍬', '🎂', '🍓', // Chocolates & sweets
-                '💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '💜', '🩷', // Hearts
-                '🦋', '🌈', '💫', '🌟', '🎀', '💐', '🌺', '🌸', '🌹' // Extra pretty items
+                '🌸', '🌺', '🌹', '🌻', '🌷', '🌼', '🌙', '⭐', '✨',
+                '🍫', '🍰', '🧁', '🍪', '🍩', '🍭', '🍬', '🎂', '🍓',
+                '💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '💜', '🩷',
+                '🦋', '🌈', '💫', '🌟', '🎀', '💐', '🌺', '🌸', '🌹'
             ];
-
-            // Create 80 falling love items over 6 seconds
             for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const loveItem = document.createElement('div');
                     loveItem.className = 'love-item';
                     loveItem.textContent = loveItems[Math.floor(Math.random() * loveItems.length)];
-
-                    // Random horizontal position
                     loveItem.style.left = Math.random() * 100 + 'vw';
-
-                    // Random size between 1.5-3rem
-                    const size = Math.random() * 1.5 + 1.5;
+                    const size = Math.random() * 1.5 + 1;
                     loveItem.style.fontSize = `${size}rem`;
-
-                    // Random animation duration
                     loveItem.style.animationDuration = (Math.random() * 2 + 3) + 's';
-
-                    // Add random delay for more natural look
                     loveItem.style.animationDelay = (Math.random() * 0.5) + 's';
-
                     shower.appendChild(loveItem);
-
-                    // Remove item after animation completes
                     setTimeout(() => {
                         if (loveItem.parentNode) {
                             loveItem.remove();
                         }
                     }, 6000);
-                }, i * 75); // Stagger the love items
+                }, i * 75);
             }
         }
-
         function playLoveSound() {
             if (!audioContext) return;
-
-            // Play a romantic, dreamy melody
             const loveNotes = [
                 { freq: 440.00, duration: 0.4 }, // A4
                 { freq: 523.25, duration: 0.4 }, // C5
@@ -862,16 +778,13 @@
                 { freq: 987.77, duration: 0.4 }, // B5
                 { freq: 880.00, duration: 1.0 }, // A5
             ];
-
             let currentTime = audioContext.currentTime;
             loveNotes.forEach(note => {
                 playTone(note.freq, note.duration, currentTime);
                 currentTime += note.duration;
             });
-
-            // Add some sparkle effects with higher frequencies
             setTimeout(() => {
-                const sparkleFreqs = [1318.51, 1567.98, 1975.53]; // E6, G6, B6
+                const sparkleFreqs = [1318.51, 1567.98, 1975.53];
                 sparkleFreqs.forEach((freq, index) => {
                     setTimeout(() => {
                         playTone(freq, 0.3, audioContext.currentTime);
